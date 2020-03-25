@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  id: 
+  name: 
+  description: 
+  currentStatus: 
+  finishDate: 2020-03-24
+  active: false
+  category_id: 
+
+two:
+  id: 
+  name: 
+  description: 
+  currentStatus: 
+  finishDate: 2020-03-24
+  active: false
+  category_id: 

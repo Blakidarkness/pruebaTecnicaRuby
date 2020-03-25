@@ -1,0 +1,30 @@
+    <div class="row col-12 ">
+      <h3>Lista de proyectos</h3>
+    </div>
+    <div class="row col-12 justify-content-end">
+     <a href="/projects/new">  <button type="button"  class="btn btn-primary">Agregar</button> </a>
+    </div>
+    <div class="row col-12 mt-3">
+      <table class="table">
+        <tr>
+          <th>id</th>
+          <th>nombre</th>
+          <th>descripción</th>
+          <th>Acciones</th>
+        </tr>
+       
+        <% @projects.each do |project| %>
+          <tr>
+            <td><%= project.id %></td>
+            <td><%= project.name %></td>
+            <td><%= project.description %></td>
+            <td><%= link_to 'Edit', edit_project_path(project) %>
+              <%= link_to 'Destroy', "/projects/#{project.id}",
+              method: :delete,
+              data: { confirm: 'Eliminar categoría?' } %>
+            </td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+  
