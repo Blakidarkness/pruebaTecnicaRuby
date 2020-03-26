@@ -4,7 +4,7 @@
        <label>Nombre*</label>
     </div>
     <div class="row col-12">
-       <input value="<%= @project.name%>" id="nombre" name="nombre" type="text" class="form-control">
+       <input required value="<%= @project.name%>" id="nombre" name="nombre" type="text" class="form-control">
     </div>
     <div class="row col-12">
        <label>Descripción</label>
@@ -19,8 +19,12 @@
        <div class="row col-6">
           <label>¿Está Activo?</label>
           <div class="custom-control custom-switch ml-2">
-             <input type="checkbox" class="custom-control-input" id="activo" name="activo">
-             <label class="custom-control-label" for="activo"></label>
+             <% if @project.active %>
+             <input type="checkbox" checked class="custom-control-input" id="activo" name="activo">
+            <%else%>
+            <input  type="checkbox" class="custom-control-input" id="activo" name="activo">
+            <% end %>
+                <label class="custom-control-label" for="activo"></label>
            </div>
        </div>
     </div>
@@ -46,7 +50,7 @@
 
     <div class="row col-12 mt-1">
        <div class="row col-5">
-          <input value="<%= @project.finishDate%>" class="form-control" id="fecha" name="fecha" width="276" />
+          <input required value="<%= @project.finishDate%>" class="form-control" id="fecha" name="fecha" width="276" />
 <script>
    $('#fecha').datepicker({
       format: 'yyyy-mm-dd'})
@@ -60,7 +64,7 @@
 </script>
        </div>
        <div class="row col-6 offset-1">
-          <select class="form-control" id="categoria" name="categoria">
+          <select required class="form-control" id="categoria" name="categoria">
              <% @categories.each do |category | %>
              <option value=<%= category.id %>><%= category.name %></option>
              <% end %>

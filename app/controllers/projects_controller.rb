@@ -1,5 +1,6 @@
 class ProjectsController < ApplicationController
     skip_before_action :verify_authenticity_token
+    before_action :authenticate_user!
     def index
         @projects = Project.all
     end
@@ -7,7 +8,7 @@ class ProjectsController < ApplicationController
         @categories = Category.all    
     end
     def create
-        
+        if (params[:fecha].length>0 && params[:nombre].length>0 && params[:categoria].length>0)
         @project = Project.new
         @project.finishDate = params[:fecha]
         @project.name = params[:nombre]
@@ -17,12 +18,18 @@ class ProjectsController < ApplicationController
         @project.category_id = params[:categoria]
         @project.save()
         redirect_to projects_path
+        else
+            flash[:alert] = 'Verifique todos los campos'
+            redirect_back(fallback_location: root_path)
+        end
+        
     end
     def edit
         @categories = Category.all    
         @project = Project.find(params[:id])
     end
     def  actualizar
+        if (params[:fecha].length>0 && params[:nombre].length>0 && params[:categoria].length>0)
         @project = Project.find(params[:id])
         @project.update(finishDate:params[:fecha])
         @project.update(name:params[:nombre])
@@ -32,6 +39,10 @@ class ProjectsController < ApplicationController
         @project.update(category_id: params[:categoria])
         @project.save()
         redirect_to projects_path
+        else
+            flash[:alert] = 'Verifique todos los campos'
+            redirect_back(fallback_location: root_path)
+        end
     end
     def destroy
         @project = Project.find(params[:id])

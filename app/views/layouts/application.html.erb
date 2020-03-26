@@ -39,9 +39,18 @@
     </nav>
 
     <div class="container row col-12 justify-content-center p-4 "> 
-      <div class="row col-12"> 
-        <p class="notice"><%= notice %></p>
-       <p class="alert"><%= alert %></p>
+      <div class="row col-12 justify-content-center">
+        <% if notice %>
+        <div class="alert col-6 alert-warning " role="alert">
+         <%= notice %>
+        </div> 
+        <% end %>
+
+        <% if alert %>
+        <div class="alert col-6 alert-danger " role="alert">
+         <%= alert %>
+        </div> 
+        <% end %>
       </div>
       <div class="container row fluid d-flex col-8">
         

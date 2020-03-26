@@ -7,20 +7,34 @@ class CategoriesController < ApplicationController
     def new    
     end
     def create
-        @category = Category.new
-        @category.name = params[:nombre]
-        @category.description = params[:descripcion]
-        @category.save()
-        redirect_to categories_path
+        if params[:nombre].length>0
+            @category = Category.new
+            @category.name = params[:nombre]
+            @category.description = params[:descripcion]
+            @category.save()
+            redirect_to categories_path 
+        else
+            flash[:alert] = 'Verifique todos los campos'
+            redirect_back(fallback_location: root_path)
+        end
+        
+        
     end
     def edit
         @category = Category.find(params[:id])
     end
     def  actualizar
-        @category = Category.find(params[:id])
-        @category.update(name:params[:nombre])
-        @category.update(description:params[:descripcion])
-        redirect_to categories_path
+        if params[:nombre].length>0
+            @category = Category.find(params[:id])
+            @category.update(name:params[:nombre])
+            @category.update(description:params[:descripcion])
+            redirect_to categories_path
+        else
+            flash[:alert] = 'Verifique todos los campos'
+            redirect_back(fallback_location: root_path)
+        end
+       
+        
     end
     def destroy
         @category = Category.find(params[:id])
