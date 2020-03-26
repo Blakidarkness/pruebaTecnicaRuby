@@ -7,7 +7,7 @@ class CreateProjects < ActiveRecord::Migration[5.0]
       t.date :finishDate, null: false
       t.boolean :active
       t.references :category, null: false
-      add_foreign_key :projects, :categories
+      add_foreign_key :category_id, :categories
     end
   end
 end
