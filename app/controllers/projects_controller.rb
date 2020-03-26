@@ -3,6 +3,7 @@ class ProjectsController < ApplicationController
     before_action :authenticate_user!
     def index
         @projects = Project.all
+        @categories = Category.all
     end
     def new
         @categories = Category.all    
@@ -48,5 +49,16 @@ class ProjectsController < ApplicationController
         @project = Project.find(params[:id])
         @project.destroy
         redirect_to projects_path
-      end
+    end
+    def buscar
+        if params[:categoria].to_i == 0
+            @projects = Project.all
+            @categories = Category.all
+            render "result" 
+        else
+            @categories = Category.all 
+            @projects = Project.where(category_id: params[:categoria])
+            render "result"
+        end
+    end
 end

@@ -1,0 +1,77 @@
+<div class="row col-12 ">
+    <h3>Lista de proyectos</h3>
+  </div>
+  <div class="row col-12">
+    <div class="col-6"> 
+      <input  class="form-control" type="text"  id="search" placeholder="Buscar proyecto">
+    </div>
+    <div class="offset-4">
+      <a href="/projects/new"> <button type="button" class="btn btn-primary">Agregar</button> </a>
+    </div>
+  </div>
+  <div class="row col-12">
+    <label>Buscar por categoría: </label>
+    <form method="post" action="/projects/categoria" class="col-12">
+    <div class="row col-12">
+      <div class="col-6"> 
+        <select required class="form-control" id="categoria" name="categoria">
+          <option value="0">Todas las categorías</option>
+          <% @categories.each do |category | %>
+          <option value=<%= category.id %>><%= category.name %></option>
+          <% end %>
+        </select>
+       
+      </div>
+      <div class="col-2 offset-4 ml-1 ">
+        <button type="submit"  class="btn btn-primary">Buscar</button>
+      </div>
+    </div>
+  </form>
+  </div>
+  <div class="row col-12 mt-3">
+    <table class="table" id="table">
+      <tr>
+        <th>id</th>
+        <th>nombre</th>
+        <th>descripción</th>
+        <th>status</th>
+        <th>activo</th>
+        <th>Fecha de término</th>
+        <th>Acciones</th>
+      </tr>
+  
+      <% @projects.each do |project| %>
+      <tr>
+        <td><%= project.id %></td>
+        <td><%= project.name %></td>
+        <td><%= project.description %></td>
+        <td><%= project.currentStatus %></td>
+        <td>
+          <% if project.active %>
+          si
+          <% else %>
+          no
+          <% end %>
+        </td>
+        <td><%= project.finishDate %></td>
+        <td><%= link_to 'Edit', edit_project_path(project) %>
+          <%= link_to 'Destroy', "/projects/#{project.id}",
+                method: :delete,
+                data: { confirm: 'Eliminar Proyecto?' } %>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+  
+  <script>
+    var $rows = $('#table tr');
+  $('#search').keyup(function() {
+      var val = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();
+      
+      $rows.show().filter(function() {
+          var text = $(this).text().replace(/\s+/g, ' ').toLowerCase();
+          return !~text.indexOf(val);
+      }).hide();
+  });
+  </script>

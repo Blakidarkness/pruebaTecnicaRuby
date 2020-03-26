@@ -9,6 +9,25 @@
     <a href="/projects/new"> <button type="button" class="btn btn-primary">Agregar</button> </a>
   </div>
 </div>
+<div class="row col-12">
+  <label>Buscar por categoría: </label>
+  <form method="post" action="/projects/categoria" class="col-12">
+  <div class="row col-12">
+    <div class="col-6"> 
+      <select required class="form-control" id="categoria" name="categoria">
+        <option value="0">Todas las categorías</option>
+        <% @categories.each do |category | %>
+        <option value=<%= category.id %>><%= category.name %></option>
+        <% end %>
+      </select>
+     
+    </div>
+    <div class="col-2 offset-4 ml-1 ">
+      <button type="submit"  class="btn btn-primary">Buscar</button>
+    </div>
+  </div>
+</form>
+</div>
 <div class="row col-12 mt-3">
   <table class="table" id="table">
     <tr>
