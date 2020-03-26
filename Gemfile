@@ -14,6 +14,12 @@ gem 'pg'
 # Use Bootstrap as the CSS
 gem 'bootstrap'
 
+#Use Bootstrap Datepicker 
+gem 'bootstrap-datepicker-rails'
+
+#Use devise
+gem 'devise'
+
 # Use Puma as the app server
 gem 'puma', '~> 3.0'
 # Use SCSS for stylesheets

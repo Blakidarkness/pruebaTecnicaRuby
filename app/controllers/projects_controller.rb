@@ -3,27 +3,39 @@ class ProjectsController < ApplicationController
     def index
         @projects = Project.all
     end
-    def new    
+    def new
+        @categories = Category.all    
     end
     def create
-        @category = Project.new
-        @category.name = params[:nombre]
-        @category.description = params[:descripcion]
-        @category.save()
-        redirect_to categories_path
+        
+        @project = Project.new
+        @project.finishDate = params[:fecha]
+        @project.name = params[:nombre]
+        @project.description = params[:descripcion]
+        @project.currentStatus = params[:status]
+        @project.active = params[:activo]
+        @project.category_id = params[:categoria]
+        @project.save()
+        redirect_to projects_path
     end
     def edit
-        @category = Project.find(params[:id])
+        @categories = Category.all    
+        @project = Project.find(params[:id])
     end
     def  actualizar
-        @category = Project.find(params[:id])
-        @category.update(name:params[:nombre])
-        @category.update(description:params[:descripcion])
-        redirect_to categories_path
+        @project = Project.find(params[:id])
+        @project.update(finishDate:params[:fecha])
+        @project.update(name:params[:nombre])
+        @project.update(description:params[:descripcion])
+        @project.update(currentStatus: params[:status])
+        @project.update(active: params[:activo])
+        @project.update(category_id: params[:categoria])
+        @project.save()
+        redirect_to projects_path
     end
     def destroy
-        @category = Project.find(params[:id])
-        @category.destroy
-        redirect_to categories_path
+        @project = Project.find(params[:id])
+        @project.destroy
+        redirect_to projects_path
       end
 end

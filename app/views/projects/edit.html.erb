@@ -1,20 +1,78 @@
-<form action="/categories/save/<%= @category.id%>" method="POST">
-<div class="row form-group  col-12">
-     <div class="row col-12">
-        <label>Nombre*</label>
-     </div>
-     <div class="row col-12">
-        <input value=<%= @category.name %> id="nombre" name="nombre" type="text" class="form-control">
-     </div>
-     <div class="row col-12">
-        <label>Descripción</label>
-     </div>
-     <div class="row col-12">
-        <input value=<%= @category.description%> id="descripcion" name="descripcion" type="text" class="form-control">
-     </div>
-     <div class="row col-12 mt-3 justify-content-end">
-       <a href="/categories"><button type="button" class="btn btn-outline-secondary ">Cancelar</button></a>
-       <button type="submit" class="btn btn-primary ml-3">Guardar</button>
-        
+<form method="POST" action="/projects/save/<%= @project.id%>"> 
+   <div class="row form-group  col-12">
+    <div class="row col-12">
+       <label>Nombre*</label>
     </div>
+    <div class="row col-12">
+       <input value="<%= @project.name%>" id="nombre" name="nombre" type="text" class="form-control">
+    </div>
+    <div class="row col-12">
+       <label>Descripción</label>
+    </div>
+    <div class="row col-12">
+       <input value="<%= @project.description%>" id="descripcion" name="descripcion" type="text" class="form-control">
+    </div>
+    <div class="row col-12 mt-1">
+       <div class="row col-6">
+          <label>Status Actual</label>
+       </div>
+       <div class="row col-6">
+          <label>¿Está Activo?</label>
+          <div class="custom-control custom-switch ml-2">
+             <input type="checkbox" class="custom-control-input" id="activo" name="activo">
+             <label class="custom-control-label" for="activo"></label>
+           </div>
+       </div>
+    </div>
+    <div class="row col-12 mt-1">
+       <div class="row col-5">
+          <select class="form-control" id="status" name="status">
+             <option value="EN ESPERA">EN ESPERA</option>
+             <option value="INICIADO">INICIADO</option>
+             <option value="TERMINADO">TERMINADO</option>
+           </select>
+       </div>
+    </div>
+    
+    <div class="row col-12 mt-1">
+       <div class="row col-5">
+          <label>Fecha de Finalización*</label>
+       </div>
+       <div class="row col-6 offset-1">
+          <label>Categoría*</label>
+       </div>
+    </div>
+
+
+    <div class="row col-12 mt-1">
+       <div class="row col-5">
+          <input value="<%= @project.finishDate%>" class="form-control" id="fecha" name="fecha" width="276" />
+<script>
+   $('#fecha').datepicker({
+      format: 'yyyy-mm-dd'})
+      $('#fecha').datepicker('update', $('#fecha').val());
+   $('#fecha').on('changeDate', function() {
+       $('#fecha').val(
+           $('#fecha').datepicker('getFormattedDate')
+       );
+   });
+    
+</script>
+       </div>
+       <div class="row col-6 offset-1">
+          <select class="form-control" id="categoria" name="categoria">
+             <% @categories.each do |category | %>
+             <option value=<%= category.id %>><%= category.name %></option>
+             <% end %>
+           </select>
+          
+       </div>
+    </div>
+
+    <div class="row col-12 mt-5 justify-content-end">
+      <a href="./"><button type="button" class="btn btn-outline-secondary ">Cancelar</button></a>
+       <button type="submit" class="btn btn-primary ml-3">Guardar</button>
+    </div>
+       
+   </div>
 </form>

@@ -1,7 +1,8 @@
 class CategoriesController < ApplicationController
     skip_before_action :verify_authenticity_token
+    before_action :authenticate_user!
     def index
-        @categories = Category.all
+            @categories = Category.all
     end
     def new    
     end
