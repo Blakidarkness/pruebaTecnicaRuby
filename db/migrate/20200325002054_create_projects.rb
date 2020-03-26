@@ -7,5 +7,6 @@ class CreateProjects < ActiveRecord::Migration[5.0]
       t.date :finishDate, null: false
       t.boolean :active
       t.references :category, null: false
+    end
   end
 end
